@@ -1,0 +1,173 @@
+Use g++ -o hello.exe hello.cpp to build exe for c++
+
+C++ main is not static
+
+Types:
+ Built In
+ User Defined
+ Pointer type
+
+C++ structs can have inheritance
+
+Layout:
+    Layout refers to how the members of an object of class, struct or union type are arranged in memory.
+     Literal type 
+          
+
+Classes:
+ Value type - By default classes are value type by default. 
+              So if passed in function,  changes wont persist outside without &
+              has a Copy constructor
+ Reference type - Base classes, virtual functions for polymorphism
+ Note: 
+  using new() is not a requirement for polymorphism. It should work for both stack and heap objects
+  Classes can be declared on stack/heap
+
+
+constexpr:
+ Applicable to both variables and functions
+ Value cannot change once initialized
+
+Intialization and Default values 
+ functions 
+ class variables
+ non class variables
+ default values 
+  array<int, 3> ax => no default vaues, some randomgibberish
+  array<int, 3> ax = {} => default values of 0
+
+decltype
+
+Loops
+Range based for loops:
+ Automatically recognizes arrays.
+ Recognizes containers that have .begin() and .end().
+ Don't have to specify begin()/end()
+
+Functions
+ functions with variable number of arguments (...)
+ default and deleted functions
+
+Namespace hiding
+  If a local variable has the same name as a namespace variable, the namespace variable is hidden. This
+  can be an issue
+
+Enums
+ scoped =? enum class Foo {option_1=0,option2=1};
+ unscoped => can have side effects with casting
+
+Structs:
+ Same semantics as classes but has default public visibility
+ Can be on stack or heap
+ Can have inheritance 
+
+Functions:
+ auto is a valid return type
+ inline vs constexpr 
+  use inline for really short functions (eg get/set of an object). Avoids func call overhead
+  use constexpr if results can be computed and are required at compile time
+ returning a func by & is dangerous/can have side effects. smart pointers are a better option 
+
+volatile:
+ A  hint to compiler to not optimize the variable/method as it can change
+
+Function Templates
+
+
+
+C++ functions:
+
+
+const functions vs const paramaters in functions
+ const functions cannot change the object state/cant call other non const functions
+ const paramaters cannot modify the parameter to the func
+
+
+constexpr
+ functions => 
+  If constexpr parameters are passed, then it produces compile time value 
+  If not constexpr parameters are passed, then it behaves like a regular function.
+  The parameters and the return type should be literal
+ variables =>similar toconst but have to be defined when declared
+
+Access Control
+ public, private,protected and friend
+ during inheritance, the access control of base class will decide if/access control 
+ for derived class https://docs.microsoft.com/en-us/cpp/cpp/member-access-control-cpp?view=vs-2019
+
+Inheritance:
+ public/protected static members will be accessible to all future derived classes 
+ even if the derived classes inherit privately (eg: class derived: private base)
+
+Using smart pointers eliminates the need for using destructors
+
+
+
+
+Constructors 
+ Cannot be virtual
+ Types:
+  default 
+  copy Eg: Box(const Box& other)
+  move constructors
+ 
+ Order of construction
+  Base class constructors will be called first
+  If a constructor has composition (Other objects), they will be called
+  virtual functions in base class will be called before the derived class constructor
+ 
+ Disable certain constructors using delete (eg. to prevent copy/move etc)
+ constexpr constructors
+ They can initialize const, volatile objects
+ Using initialization lists in the constructor when there are a lot of values to set;
+
+ https://docs.microsoft.com/en-us/cpp/cpp/constructors-cpp?view=vs-2019 
+
+Destructors:
+ Can be virtual
+ 
+
+ Member Functions
+  can be static/non_static/friend
+  const member functions (have a const at the end of function signature) will not change the class state. 
+  can be virtual
+  can be final/override (have the qualifier at the end)
+  can have override qualifier at the end of signature to state the intent to override from base class's vesion of the function
+
+  virtual member functions in base class should have a definition unless they are pure virtual functions. 
+  Having atleast 1 pure virtual function makes a class Abstract.Can't be instantiated. 
+
+Abstract class
+ Should have atleast 1 pure virtual function 
+ Can't be instantiated
+ Equivalent to interface but cann have all things a class can have
+
+
+Inheritance
+ Inheritance can be done as :public, :private, :protected (Specified after class name)
+ also qualify with class Derived :virtual public Base (if the Base will be referenced several times)
+ Multiple inheritance is supported
+
+
+
+
+
+
+Collections
+ auto  it = foo.rbegin();it!=foo.rend();++it => correct
+ auto  it = foo.rbegin();it!=foo.rend();--it => wrong
+
+ iterators are similar to pointers. Accessed using * and -> notation
+ 
+ 
+
+Donts:
+ use void *
+ return references to objects created on stack inside functions
+ use NULL/0 as null pointer.  Use nullptr instead
+ use printf() with c++ strings
+
+
+Do's
+ use auto unless explicit casting is required
+ use explicit constructors when possible
